@@ -1,0 +1,29 @@
+/* Teach 02 css */
+
+#div1 {
+  padding: 1em;
+  height: 100px;
+  background-color: indigo;
+  color: bisque;
+  font-size: 120%;
+}
+
+#div2 {
+  padding: 2em;
+  height: 50px;
+  background-color: red;
+  color: white;
+  font-size: 150%;
+}
+
+#div3 {
+  padding: 3em 1em;
+  height: 100px;
+  background-color: rgb(24, 167, 55);
+  color: black;
+  font-size: 75%;
+}
+
+.colordiv:hover {
+  font-weight: bold;
+}
