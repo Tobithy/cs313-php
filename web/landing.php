@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container">
     <h1>This is my first bootstrap</h1>
     <p>Lorem ipsum iam dumdum</p>
   </div>
