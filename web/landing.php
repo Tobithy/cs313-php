@@ -18,7 +18,7 @@
 </head>
 
 <body>
-  <!-- Navbar -->
+  <!-- Navbar. currentPage variable ensures correct "active" status in the navbar -->
   <?php $currentPage = 'Landing'; ?>
   <?php include 'common/navbar.php'; ?>
 
