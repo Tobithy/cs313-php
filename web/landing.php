@@ -18,25 +18,9 @@
 </head>
 
 <body>
-  <!-- Collapsible navbar. Should stay at the top of the screen -->
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-    <!-- Button to collapse navbar -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Navbar -->
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="landing.php">Landing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="assignments.php">Assignments</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <!-- Navbar -->
+  <?php $currentPage = 'Landing'; ?>
+  <?php include 'common/navbar.php'; ?>
 
 
   <div class="container pt-3">
