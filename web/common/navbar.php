@@ -12,8 +12,8 @@
       <?php
         // urls and names array
         $urls = array(
-          'Landing' => 'landing.php',
-          'Assignments' => 'assignments.php'
+          'Landing' => '/landing.php',
+          'Assignments' => '/assignments.php'
         );
 
         foreach ($urls as $name => $url) {

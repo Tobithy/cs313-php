@@ -7,16 +7,16 @@
   <meta charset="utf-8">
 
   <!-- Bootstrap necessaries -->
-  <?php require 'common/bootstrap_includes.php'; ?>
+  <?php require $_SERVER["DOCUMENT_ROOT"] . '/common/bootstrap_includes.php'; ?>
 
-  <!-- Sitewide requires -->
-  <?php require 'common/sitewide_includes.php'; ?>
+  <!-- Sitewide requires (use absolute paths for sitewide php) -->
+  <?php require $_SERVER["DOCUMENT_ROOT"] . '/common/sitewide_includes.php'; ?>
 </head>
 
 <body>
   <!-- Navbar. currentPage variable ensures correct "active" status in the navbar -->
   <?php $currentPage = 'Landing'; ?>
-  <?php require 'common/navbar.php'; ?>
+  <?php include $_SERVER["DOCUMENT_ROOT"] . '/common/navbar.php'; ?>
 
 
   <div class="container pt-3">

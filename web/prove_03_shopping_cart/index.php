@@ -2,7 +2,7 @@
 <html lang="en-US">
 
 <head>
-  <title>Prove 02 | CS313 Assignments</title>
+  <title>Prove 03 | CS313 Shopping Cart</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta charset="utf-8">
 
@@ -18,28 +18,12 @@
 
 <body>
   <!-- Navbar. currentPage variable ensures correct "active" status in the navbar -->
-  <?php $currentPage = 'Assignments'; ?>
+  <?php /*$currentPage = 'Assignments';//No active for now*/ ?>
   <?php include $_SERVER["DOCUMENT_ROOT"] . '/common/navbar.php'; ?>
 
 
   <div class="container pt-3">
-    <h1 class="display-3">Assignments</h1>
-  </div>
-
-  <!-- Lay out assignments in a grid. Tiles are cards. -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card bg-warning h-100">
-          <img class="card-img-top" src="img_assignments/03_prove_shopping_cart.svg" alt="Prove 3: Shopping Cart">
-          <div class="card-body">
-            <h4 class="card-title">Prove 03</h4>
-            <p class="card-text">Shopping Cart</p>
-            <a href="prove_03_shopping_cart/" class="stretched-link"></a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1 class="display-3">Shopping Cart</h1>
   </div>
 
 </body>
