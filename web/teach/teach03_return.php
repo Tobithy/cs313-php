@@ -10,11 +10,11 @@
 </head>
 
 <body>
-  Name: <?php echo $_POST["name"]; ?><br>
-  Email: <?php echo $_POST["email"]; ?><br>
-  Major: <?php echo $_POST["major"]; ?><br>
+  Name: <?php echo htmlspecialchars($_POST["name"]); ?><br>
+  Email: <?php echo htmlspecialchars($_POST["email"]); ?><br>
+  Major: <?php echo htmlspecialchars($_POST["major"]); ?><br>
   Comments:<br>
-  <?php echo $_POST["comments"]; ?><br>
+  <?php echo htmlspecialchars($_POST["comments"]); ?><br>
   Continents visited:<br>
   <?php
     $continent=$_POST["continent"];
@@ -25,7 +25,7 @@
     
     for($i=0; $i < $N; $i++)
     {
-      echo($continent_map[$continent[$i]] . "<br>");
+      echo($continent_map[htmlspecialchars($continent[$i])] . "<br>");
     }
   ?>
   <br>
