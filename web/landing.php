@@ -16,7 +16,7 @@
 <body>
   <!-- Navbar. currentPage variable ensures correct "active" status in the navbar -->
   <?php $currentPage = 'Landing'; ?>
-  <?php include $_SERVER["DOCUMENT_ROOT"] . '/common/navbar.php'; ?>
+  <?php require $_SERVER["DOCUMENT_ROOT"] . '/common/navbar.php'; ?>
 
 
   <div class="container pt-3">
