@@ -12,14 +12,14 @@
   <!-- Sitewide requires (use absolute paths for sitewide php) -->
   <?php require $_SERVER["DOCUMENT_ROOT"] . '/common/sitewide_includes.php'; ?>
 
-  <!-- Page specific css -->
+  <!-- Page specific css (use absolute path from web root) -->
   <link rel="stylesheet" href="/css/assignments.css">
 </head>
 
 <body>
   <!-- Navbar. currentPage variable ensures correct "active" status in the navbar -->
   <?php $currentPage = 'Assignments'; ?>
-  <?php include $_SERVER["DOCUMENT_ROOT"] . '/common/navbar.php'; ?>
+  <?php require $_SERVER["DOCUMENT_ROOT"] . '/common/navbar.php'; ?>
 
 
   <div class="container pt-3">
