@@ -95,7 +95,10 @@ if ($addressValid && issetandfilled($_POST['zipcode'])) {
   <?php require $_SERVER["DOCUMENT_ROOT"] . '/common/navbar.php'; ?>
   <?php require $_SERVER["DOCUMENT_ROOT"] . '/prove_03_shopping_cart/shopping_navbar.php'; ?>
 
-
+  <!-- Only proceed with the rest of this page if a complete address was supplied -->
+  <?php
+    if ($addressValid) {
+  ?>
   <div class="container pt-3">
     <h1 class="display-4">Order Complete</h1>
   </div>
@@ -139,6 +142,18 @@ if ($addressValid && issetandfilled($_POST['zipcode'])) {
     }
     ?>
   </div>
+
+  <!-- now finish up the php if..else statement -->
+  <?php
+  } else {
+  ?>
+  <div class="container pt-3">
+    <h1 class="display-4">Order Failed</h1>
+    <p>Address was not provided, was incomplete, or had empty elements</p>
+  </div>
+  <?php
+  }
+  ?>
 
 </body>
 
