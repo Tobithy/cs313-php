@@ -9,7 +9,7 @@ CREATE TABLE UserAccount (
     hashedPassword      varchar(255)    NOT NULL        ,
     firstName           varchar(255)                    ,
     lastName            varchar(255)                    ,
-    dataDisplayPrefId   integer         REFERENCES DataDisplayPref (dataDisplayPrefId)
+    dataDisplayPrefId   integer         REFERENCES DataDisplayPref (dataDisplayPrefId) NOT NULL
 );
 
 CREATE TABLE ClinicalTest (
@@ -23,9 +23,9 @@ CREATE TABLE ClinicalTest (
 
 CREATE TABLE ClinicalData (
     clinicalDataId          serial          PRIMARY KEY     ,
-    userAccountId           integer         REFERENCES UserAccount (userAccountId),
+    userAccountId           integer         REFERENCES UserAccount (userAccountId) NOT NULL,
     date                    date            NOT NULL        ,
-    clinicalTestId          integer         REFERENCES ClinicalTest (clinicalTestId),
+    clinicalTestId          integer         REFERENCES ClinicalTest (clinicalTestId) NOT NULL,
     dataFloat               real                            ,
     dataText                varchar(255)                    ,
     dataComment             varchar(1024)                   ,
