@@ -40,16 +40,16 @@ INSERT INTO data_display_pref (display_preference)
 
 INSERT INTO user_account (email_address, hashed_password, first_name, last_name, data_display_pref_id)
     VALUES ('markhammond@gmail.com', 'THISISMARKSHASHEDPASSWORD', 'Mark', 'Hammond', 
-        (SELECT data_display_pref_id FROM data_display_pref d WHERE d.display_preference = 'asdfi')
+        (SELECT data_display_pref_id FROM data_display_pref AS d WHERE d.display_preference = 'GRAPHICAL')
 );
 
 INSERT INTO user_account
-    (email_address, hashed_password, first_name, last_name, data_display_pref)
+    (email_address, hashed_password, first_name, last_name, data_display_pref_id)
 VALUES
     ('edgycollapser@yahoo.com', 'THISISBOBSHASHEDPASSWORD', 'Bob', 'Wooley',
         (SELECT data_display_pref_id
-        FROM data_display_pref d
-        WHERE d.display_preference = 'GRAPHICAL')
+        FROM data_display_pref AS d
+        WHERE d.display_preference = 'TABULAR')
 );
 
 INSERT INTO clinical_test
@@ -74,9 +74,9 @@ INSERT INTO clinical_data
     (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
 VALUES
     (
-        (SELECT user_account_id FROM user_account u WHERE u.email_address = 'markhammond@gmail.com'),
-        CURRENT_DATE(),
-        (SELECT clinical_test_id FROM clinical_test c WHERE c.clinical_test_label = FVC), 
+        (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'markhammond@gmail.com'),
+        CURRENT_DATE,
+        (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = 'FEV1'), 
         67, NULL, 'Was feeling really good today'
 
 );
@@ -85,9 +85,9 @@ INSERT INTO clinical_data
     (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
 VALUES
     (
-        (SELECT user_account_id FROM user_account u WHERE u.email_address = 'markhammond@gmail.com'),
-        CURRENT_DATE(),
-        (SELECT clinical_test_id FROM clinical_test c WHERE c.clinical_test_label = 'FVC'), 
+        (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'markhammond@gmail.com'),
+        CURRENT_DATE,
+        (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = 'FVC'), 
         82, NULL, 'Was feeling really good today'
 
 );
@@ -96,9 +96,9 @@ INSERT INTO clinical_data
     (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
 VALUES
     (
-        (SELECT user_account_id FROM user_account u WHERE u.email_address = 'edgycollapser@yahoo.com'),
-        CURRENT_DATE(),
-        (SELECT clinical_test_id FROM clinical_test c WHERE c.clinical_test_label = 'FEV1'), 
+        (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'edgycollapser@yahoo.com'),
+        CURRENT_DATE,
+        (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = 'FEV1'), 
         39, NULL, 'I have a cold today'
 
 );
