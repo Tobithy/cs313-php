@@ -86,6 +86,17 @@ INSERT INTO clinical_data
 VALUES
     (
         (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'markhammond@gmail.com'),
+        CURRENT_DATE - 7,
+        (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = 'FEV1'), 
+        67, NULL, 'Was feeling really good today'
+
+);
+
+INSERT INTO clinical_data
+    (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
+VALUES
+    (
+        (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'markhammond@gmail.com'),
         CURRENT_DATE,
         (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = 'FVC'), 
         82, NULL, 'Was feeling really good today'
