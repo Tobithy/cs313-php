@@ -13,26 +13,7 @@ function loggedIn() {
   return false;
 }
 
-
-
-// create the items_in_cart aray if it doesn't exist yet. 
-if (!isset($_SESSION['items_in_cart'])) {
-  $_SESSION['items_in_cart'] = array();
-}
-
-// Define array of items to buy. This could be changed to an array of item objects
-//  if we create an item class at some point. Right now it's just a 2d array that has a short key and 
-//  a description
-$available_items = array(
-  array("snes-excellent", "Super Nintendo Entertainment System, excellent condition"),
-  array("mario-kart-good", "SNES Mario Kart, good condition, fully tested and working"),
-  array("super-mario-world-excellent", "SNES Super Mario World, excellent condition, fully tested and working"),
-  array("tetris-and-dr-mario-excellent", "SNES Tetris & Dr. Mario, excellent condition, fully tested and working"),
-  array("star-fox-good", "SNES Star Fox, good condition, fully tested and working"),
-  array("star-fox-excellent", "SNES Star Fox, excellent condition, fully tested and working")
-);
-
-// Function test_input
+// Function clean_input
 //  Cleans user entered data so it can be safely used elsewhere. From w3schools
 //  Input
 //    $data - potentially unclean data
@@ -45,21 +26,40 @@ function clean_input($data) {
   return $data;
 }
 
-
-// Function issetandfilled
-//  Short function to check if a variable is set (not NULL) and it has data (it's not empty).
+// Function isfilled
+//  Short function to check if a variable has data (it's not empty).
 //    Use the trim function so that data that only consists of spaces is considered empty.
 //  Input
 //    $data - variable to be tested
-//  Returns TRUE if it passes both tests, FALSE if not.
-function issetandfilled($data) {
-  if (!isset($data))
-    return false;
-
+//  Returns TRUE if there is data, FALSE if not.
+function isfilled($data) {
   if (empty(trim($data)))
     return false;
   
   return true;
 }
 
+// Function php2dTojs2d
+//  Parses a 2D array to a string that can be output into a <script> tag and creates a 2D array 
+//  in JS when the page loads. 
+//  Input
+//    $php2d - PHP 2D array
+//  Output
+//    $js2dString - string that produces a 2D array in Javascript
+function php2dTojs2d($php2d)
+{
+  $js2dString = "[";
+  $firstRow = true;
+  foreach ($php2d as $row) {
+    if ($firstRow) {
+      $firstRow = false;
+    } else {
+      $js2dString = $js2dString . ",";  // make sure to add a comma after each row (so this is for the previous row)
+    }
+    $js2dString = $js2dString . "['" . $row['clinical_test_label'] . "','" . $row['clinical_test_format'] . "']";
+  }
+  $js2dString = $js2dString . "]";
+
+  return $js2dString;
+}
 ?>

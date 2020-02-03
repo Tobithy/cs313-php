@@ -24,3 +24,57 @@ SELECT cd.data_date, cd.data_float, cd.data_comment
     AND ct.clinical_test_label = 'FEV1'
 	ORDER BY cd.data_date
 	;
+
+-- Insert a piece of clinical data into the DB
+INSERT INTO clinical_data
+    (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
+VALUES
+    (
+        (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'markhammond@gmail.com'),
+        CURRENT_DATE,
+        (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = 'FEV1'), 
+        39, NULL, 'I have a cold today'
+
+);
+
+
+INSERT INTO clinical_data
+      (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
+    VALUES
+      (
+        (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'markhammond@gmail.com'),
+        :dataDate,
+        (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = :clinicalTestLabel), 
+        :dataFloat, :dataText, :dataComment
+      )
+
+SELECT clinical_test_label, clinical_test_format FROM clinical_test;
+
+
+
+SELECT * FROM clinical_test;
+
+INSERT INTO clinical_test 
+    (clinical_test_label, clinical_test_name, clinical_test_description, clinical_test_format)
+VALUES
+    ('TESTTEXT', 'Test Text Test', NULL, 'TEXT')
+;
+
+INSERT INTO clinical_data
+      (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
+    VALUES
+      (
+        (SELECT user_account_id FROM user_account AS u WHERE u.email_address = 'markhammond@gmail.com'),
+        '2020-02-06',
+        (SELECT clinical_test_id FROM clinical_test AS c WHERE c.clinical_test_label = 'TESTTEXT'), 
+        '', 'You are below normal', 'a text test'
+      )
+;
+
+DELETE FROM clinical_data 
+    WHERE clinical_data_id = 11 
+    AND user_account_id = 
+        (SELECT user_account_id FROM user_account
+            WHERE email_address = 'markhammonds@gmail.com'
+        )
+;

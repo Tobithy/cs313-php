@@ -60,7 +60,7 @@ if (isset($_POST['login'])) {
     <h2 class="display-5">LabTracker Login</h2>
   </div>
 
-  <div class="container form-signin">
+  <div class="container form-signin"> <!--Not sure that the "form-signin" class does-->
     <form action="" method="POST">
       <div class="form-group">
         <label for="email">Email address</label>
