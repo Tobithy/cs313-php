@@ -46,8 +46,7 @@ function isfilled($data) {
 //    $php2d - PHP 2D array
 //  Output
 //    $js2dString - string that produces a 2D array in Javascript
-function php2dTojs2d($php2d)
-{
+function php2dTojs2d($php2d){
   $js2dString = "[";
   $firstRow = true;
   foreach ($php2d as $row) {
@@ -61,5 +60,38 @@ function php2dTojs2d($php2d)
   $js2dString = $js2dString . "]";
 
   return $js2dString;
+}
+
+// Function clinicalDataOKToModify
+//  Checks whether a select statement to clinical data returns 1 and only 1 row. This is for verifying
+//  that a delete or edit action will be successful
+//  Input
+//    $db - the PDO database object
+//    $clinicalDataId - id of row to be deleted/edited
+//  Output
+//    $modifyOK - boolean 
+function clinicalDataOKToModify($db, $clinicalDataId){
+  $modifyOK = false;
+  $statement = $db->prepare(
+    "SELECT clinical_data_id FROM clinical_data 
+      WHERE clinical_data_id = :clinicalDataId
+      AND user_account_id = 
+        (SELECT user_account_id FROM user_account
+            WHERE email_address = :email
+        )
+    "
+  );
+
+  // execute the statement
+  $executeSuccess = $statement->execute(array(
+    ':clinicalDataId' => $clinicalDataId, ':email' => $_SESSION['email_address']
+  ));
+
+  // now check that this returned exactly 1 row
+  $clinicalDataResults = $statement->fetchAll(PDO::FETCH_ASSOC);
+  if (count($clinicalDataResults) === 1)
+    $modifyOK = true;
+
+  return $modifyOK;
 }
 ?>

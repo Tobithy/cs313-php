@@ -16,22 +16,44 @@ if (loggedIn() === false) {
 require_once  $_SERVER["DOCUMENT_ROOT"] . '/labtracker/dbconnect.php';
 
 // Now check if the user has chosen to delete or edit data
+//  Start with Deleting
 if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
-  // prepare the statement. Make sure the user only deletes stuff they own
-  $statement = $db->prepare(
-    "DELETE FROM clinical_data 
-      WHERE clinical_data_id = :clinicalDataId
-      AND user_account_id = 
-        (SELECT user_account_id FROM user_account
-            WHERE email_address = :email
-        )
-    "
-  );
-  // Note that this won't tell us if the row was actually deleted. If the SQL is correct, but 
-  //  there are no matches, then this will still return true. 
-  $executeSuccess = $statement->execute(array(
-    ':clinicalDataId' => $_POST['delete_data'], ':email' => $_SESSION['email_address']));
+  // first check that we can delete the row specified
+  $modifyIsOK = clinicalDataOKToModify($db, $_POST['delete_data']);
+  if ($modifyIsOK){
+
+    // prepare the statement. Make sure the user only deletes stuff they own
+    $statement = $db->prepare(
+      "DELETE FROM clinical_data 
+        WHERE clinical_data_id = :clinicalDataId
+        AND user_account_id = 
+          (SELECT user_account_id FROM user_account
+              WHERE email_address = :email
+          )
+      "
+    );
+    // Note that this won't tell us if the row was actually deleted. If the SQL is correct, but 
+    //  there are no matches, then this will still return true. 
+    $executeSuccess = $statement->execute(array(
+      ':clinicalDataId' => $_POST['delete_data'], ':email' => $_SESSION['email_address']));
+  }
+} else if (isset($_POST['edit_data']) && isfilled($_POST['edit_data'])) {
+  // if there was no data selected for deletion, we might get to edit. Note that only edit or delete should
+  //  ever be selected unless the user is up to some shenanigans, so it's OK to use an "else if" here
+
+  // First step is to make sure the user owns that piece of data. If not, stop this right here
+  $modifyIsOK = clinicalDataOKToModify($db, $_POST['edit_data']);
+  if ($modifyIsOK) {
+    // save a session variable with the ID of the data to be deleted. Clean it up too.
+    $_SESSION['clinical_data_id_to_edit'] = clean_input($_POST['edit_data']);
+
+    // now redirect the user to the data_edit page
+    $newpage = "Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . "/labtracker/data_edit.php";
+    header($newpage, true, 303);
+  }
 }
+
+
 // session_unset();
 // session_destroy();
 ?>

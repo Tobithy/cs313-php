@@ -78,3 +78,11 @@ DELETE FROM clinical_data
             WHERE email_address = 'markhammonds@gmail.com'
         )
 ;
+
+SELECT clinical_data_id FROM clinical_data
+    WHERE clinical_data_id = 5 
+    AND user_account_id = 
+        (SELECT user_account_id FROM user_account
+            WHERE email_address = 'markhammonds@gmail.com'
+        )
+;
