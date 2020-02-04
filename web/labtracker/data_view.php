@@ -123,7 +123,7 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
       JOIN clinical_data AS cd ON cd.clinical_test_id = ct.clinical_test_id)
       JOIN user_account AS ua ON ua.user_account_id = cd.user_account_id)
       WHERE ua.email_address = :email
-      ORDER BY ct.clinical_test_name
+      ORDER BY ct.clinical_test_label
       ;");
       $statement->execute(array(':email' => $_SESSION['email_address'],));
       $testTypeResults = $statement->fetchAll(PDO::FETCH_ASSOC);
