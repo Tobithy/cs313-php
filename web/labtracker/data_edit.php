@@ -182,7 +182,7 @@ if (isset($_POST['modify_data'])) {
 
   <?php
   // we need to get a list of all of the test types, along with whether they are TEXT or FLOAT
-  $statement = $db->query('SELECT clinical_test_label, clinical_test_format FROM clinical_test;');
+  $statement = $db->query('SELECT clinical_test_label, clinical_test_format FROM clinical_test ORDER BY clinical_test_label;');
   $clinicalTests = $statement->fetchAll(PDO::FETCH_ASSOC);
 
   // Now create a 2D array in Javascript that can be used as a lookup table for data format.

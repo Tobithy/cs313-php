@@ -1,3 +1,5 @@
+-- NOTE: This is an OLD VERSION. It is only being kept around because I turned in an assignment that referenced
+-- it. DO NOT USE THIS
 CREATE TABLE DataDisplayPref (
     dataDisplayPrefId   serial          PRIMARY KEY     ,
     displayPreference   varchar(16)     NOT NULL 
