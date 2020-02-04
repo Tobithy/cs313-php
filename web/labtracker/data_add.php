@@ -157,7 +157,7 @@ if (isset($_POST['add_and_new']) || isset($_POST['add_data'])) {
       </div>
       <button type="submit" class="btn btn-primary" name="add_and_new">Submit and add another</button>
       <button type="submit" class="btn btn-primary" name="add_data">Submit and return</button>
-      <button type="reset" class="btn btn-primary" name="reset">Reset</button>
+      <button type="reset" class="btn btn-warning" name="reset">Reset</button>
     </form>
   </div>
 

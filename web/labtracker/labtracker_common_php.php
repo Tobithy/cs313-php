@@ -94,4 +94,25 @@ function clinicalDataOKToModify($db, $clinicalDataId){
 
   return $modifyOK;
 }
+
+// Function testIsFloat
+//  Determines if a test is FLOAT, returns true if yes
+//  Input
+//    $clinicalTests - 2d array of clinical test labels and clinical test formats
+//    $clinicalTestLabel - the label in question
+//  Output
+//    true or false
+function testIsFloat($clinicalTests, $clinicalTestLabel){
+  // loop through $clinicalTests
+  foreach ($clinicalTests as $row){
+    if ($row['clinical_test_label'] == $clinicalTestLabel){
+      if ($row['clinical_test_format'] == 'FLOAT')
+        return true;
+      else 
+        return false;
+    }
+  }
+  // we should never get here unless the user is pully shenanigans, but we'll return false if we do
+  return false;
+}
 ?>

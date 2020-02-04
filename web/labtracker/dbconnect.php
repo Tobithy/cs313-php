@@ -21,7 +21,7 @@ $db = new PDO("pgsql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPass
 // this line makes PDO give us an exception when there are problems,
 // and can be very helpful in debugging! (But you would likely want
 // to disable it for production environments.)
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $ex) {
 print "<p>error: " . $ex->getMessage() . "</p>\n\n";
 die();

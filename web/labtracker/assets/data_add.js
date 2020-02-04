@@ -5,7 +5,7 @@
     Output:
       rewrites the HTML
 */
-function testFormatAdjust() {
+function adjustTestFormat() {
   // most straightforward way to find our row is to use a loop
   for (var r = 0; r < clinicalTests.length; r++){
     if (this.value == clinicalTests[r][0]) {
@@ -22,7 +22,7 @@ function testFormatAdjust() {
         // build the HTML to put in into .html
         var textHTML = '<label for="data_text" class="col-lg-2 col-form-label">Lab result</label>';
         textHTML += '<div class="col-lg-10">';
-        textHTML += '<input type="text" class="form-control" name="data_text" step="any" id="data_text" required>';
+        textHTML += '<input type="text" class="form-control" name="data_text" id="data_text" required>';
         textHTML += '</div>';
         $('#lab_result_div').html(textHTML);
       }
@@ -34,13 +34,7 @@ function testFormatAdjust() {
 }
 
 
-/*
-function changeColor() {
-  var userColor = document.getElementById("div1newcolortext").value;
-  document.getElementById("div1").style.backgroundColor = userColor;
-}
-*/
 // Only load functions once the DOM is ready
 $(document).ready(function(){
-  $('#clinical_test_label').on('change', testFormatAdjust);
+  $('#clinical_test_label').on('change', adjustTestFormat);
 });
