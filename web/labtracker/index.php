@@ -60,7 +60,7 @@ if (isset($_POST['login'])) {
     <h2 class="display-5">LabTracker Login</h2>
   </div>
 
-  <div class="container form-signin">
+  <div class="container form-signin"> <!--Not sure that the "form-signin" class does-->
     <form action="" method="POST">
       <div class="form-group">
         <label for="email">Email address</label>
@@ -70,10 +70,10 @@ if (isset($_POST['login'])) {
         <label for="password">Password</label>
         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
       </div>
-      <div class="form-check">
+      <!-- <div class="form-check">
         <input type="checkbox" class="form-check-input" name="remember" id=remember>
         <label class="form-check-label" for="remember">Remember me (not recommended for public computers)</label>
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-primary" name="login">Login</button>
     </form>
   </div>

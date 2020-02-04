@@ -17,7 +17,7 @@ CREATE TABLE clinical_test (
     clinical_test_label         varchar(16)     NOT NULL UNIQUE ,
     clinical_test_name          varchar(255)    NOT NULL UNIQUE ,
     clinical_test_description   varchar(1024)                   ,
-    clinical_test_format        varchar(16)                     ,
+    clinical_test_format        varchar(16)     NOT NULL        ,
     CHECK (clinical_test_format = 'TEXT' OR clinical_test_format = 'FLOAT')
 );
 

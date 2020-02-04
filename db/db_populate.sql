@@ -70,6 +70,43 @@ VALUES
         'FLOAT'
 );
 
+INSERT INTO clinical_test
+    (clinical_test_label, clinical_test_name, clinical_test_description, clinical_test_format)
+VALUES
+    ('A1C',
+        'Glycated hemoglobin',
+        'Average blood glucose level over the past 3 months',
+        'FLOAT'
+);
+
+INSERT INTO clinical_test
+    (clinical_test_label, clinical_test_name, clinical_test_description, clinical_test_format)
+VALUES
+    ('FEV1/FVC',
+        'Ratio of FEV1 to FVC',
+        'Also called FEV1% ',
+        'FLOAT'
+);
+
+INSERT INTO clinical_test
+    (clinical_test_label, clinical_test_name, clinical_test_description, clinical_test_format)
+VALUES
+    ('FEF25-75%',
+        'Forced expiratory flow between 25% and 75% of FVC',
+        'The mean flow (or speed) of air in the middle 2 quartiles of full FVC exhalation',
+        'FLOAT'
+);
+
+
+INSERT INTO clinical_test
+    (clinical_test_label, clinical_test_name, clinical_test_description, clinical_test_format)
+VALUES
+    ('CULTURE',
+        'Sputum culture',
+        'Bacteria and other culture results from sputum sample',
+        'TEXT'
+);
+
 INSERT INTO clinical_data
     (user_account_id, data_date, clinical_test_id, data_float, data_text, data_comment)
 VALUES
