@@ -2,15 +2,11 @@
 // use php sessions for tracking users
 session_start();
 
-$_SESSION['email_address'] = 'markhammond@gmail.com'; // for testing only
-
 // include labtracker_common_php.php
 require_once 'labtracker_common_php.php';
 
 // Make sure user is logged in
-if (loggedIn() === false) {
-  // header("Location: ./"); // Redirect the user back to login
-}
+checkLogin();
 
 // Now that we know we are logged in, we can connect to the database
 require_once  $_SERVER["DOCUMENT_ROOT"] . '/labtracker/dbconnect.php';
@@ -31,7 +27,7 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
           (SELECT user_account_id FROM user_account
               WHERE email_address = :email
           )
-      "
+      ;"
     );
     // Note that this won't tell us if the row was actually deleted. If the SQL is correct, but 
     //  there are no matches, then this will still return true. 
@@ -52,19 +48,16 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
     // now redirect the user to the data_edit page
     $newpage = "Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . "/labtracker/data_edit.php";
     header($newpage, true, 303);
+    die();
   }
 }
-
-
-// session_unset();
-// session_destroy();
 ?>
 
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
-  <title>LabTrack - My Data | CS313 Project 1</title>
+  <title>LabTracker - My Data | CS313 Project 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta charset="utf-8">
 
@@ -117,14 +110,15 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
 
 
     // Get all the available tests for the current user
-    $statement = $db->prepare("
-    SELECT DISTINCT ct.clinical_test_label, ct.clinical_test_name, ct.clinical_test_format
-      FROM ((clinical_test AS ct
-      JOIN clinical_data AS cd ON cd.clinical_test_id = ct.clinical_test_id)
-      JOIN user_account AS ua ON ua.user_account_id = cd.user_account_id)
-      WHERE ua.email_address = :email
-      ORDER BY ct.clinical_test_label
-      ;");
+    $statement = $db->prepare(
+      "SELECT DISTINCT ct.clinical_test_label, ct.clinical_test_name, ct.clinical_test_format
+        FROM ((clinical_test AS ct
+        JOIN clinical_data AS cd ON cd.clinical_test_id = ct.clinical_test_id)
+        JOIN user_account AS ua ON ua.user_account_id = cd.user_account_id)
+        WHERE ua.email_address = :email
+        ORDER BY ct.clinical_test_label
+        ;"
+      );
       $statement->execute(array(':email' => $_SESSION['email_address'],));
       $testTypeResults = $statement->fetchAll(PDO::FETCH_ASSOC);
 

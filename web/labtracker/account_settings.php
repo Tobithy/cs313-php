@@ -1,6 +1,11 @@
 <?php
+session_start();
+
 // include labtracker_common_php.php
 require_once 'labtracker_common_php.php';
+
+// Make sure user is logged in
+checkLogin();
 ?>
 
 <!DOCTYPE html>
