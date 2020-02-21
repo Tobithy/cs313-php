@@ -15,3 +15,8 @@
 .w-25 {
   width: 25% !important;
 }
+
+/* used to keep the headers for sections of the data view table matching the bg color */
+table.table.table-striped tr.bg-inherit {
+  background-color: inherit;
+}

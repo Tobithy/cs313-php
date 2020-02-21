@@ -6,6 +6,33 @@ require_once 'labtracker_common_php.php';
 
 // Make sure user is logged in
 checkLogin();
+
+// connect to DB and get user data
+require_once  $_SERVER["DOCUMENT_ROOT"] . '/labtracker/dbconnect.php';
+$emailAddress = $firstName = $lastName = "";
+$statement = $db->prepare(
+  "SELECT email_address, first_name, last_name
+      FROM user_account
+      WHERE email_address = :email
+    ;"
+);
+$executeSuccess = $statement->execute(array(':email' => $_SESSION['email_address']));
+
+// convert to array
+$userAccountResults = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+// Now we should verify that we have one row and exactly one row
+if (count($userAccountResults) === 1)
+  $retrieveSuccess = true;
+else
+  $retrieveSuccess = false;
+
+// If all is well, assign all the data from the DB to local variables
+if ($executeSuccess && $retrieveSuccess) {
+  $emailAddress = clean_input($userAccountResults[0]['email_address']); // clean before displaying since we didn't do this before
+  $firstName = clean_input($userAccountResults[0]['first_name']);
+  $lastName = clean_input($userAccountResults[0]['last_name']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,8 +62,38 @@ checkLogin();
 
   <div class="container pt-3">
     <h2 class="display-5">Account Information</h2>
-    <p>Placeholder for account information</p>
   </div>
+
+  <!-- warning message if the DB query failed -->
+  <div class="container">
+    <?php
+    if ($executeSuccess && $retrieveSuccess); // do nothing if all is well
+    else {
+      print '<div class="alert alert-dismissible fade show';
+      print ' alert-danger" role="alert">User data <strong>NOT</strong> found.<br>';
+      print '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button></div>';
+    }
+    ?>
+  </div>
+
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-3">
+        Name:
+      </div>
+      <div class="col-md-3">
+        <?php print $firstName . ' ' . $lastName; ?>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        Email address: 
+      </div>
+      <div class="col-md-3">
+        <?php print $emailAddress; ?>
+      </div>
+    </div>
 
 </body>
 

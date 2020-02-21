@@ -103,6 +103,8 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
   <form action="" id="modify_buttons" method="POST"></form>
 
   <div class="container pt-3">
+    <!-- We'll have a single table for all the data -->
+    <table class="table table-striped table-hover">
     <?php
     // For now, let's just get the data displayed in tabular form. First we need to find all the tables the 
     //  current user has data for. Eventually we should factor this out to other files, functions, and classes,
@@ -125,8 +127,8 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
     // now we have an array of arrays. 
     // $numTestTypes = count($testTypeResults);
     foreach ($testTypeResults as $testType) {
-      // For each test we have data for, print out a section with a table of the data
-    ?><h3 class="display-5"> <?php print $testType['clinical_test_label'] ?></h3><?php
+      // For each test we have data for, print out a line in the table
+    ?><tr class="bg-inherit"><th colspan="5"><h3><?php print $testType['clinical_test_label'] ?></h3></th></tr><?php
 
     // now create the table. We first need to query the db for all the data of the current test type
     $statement = $db->prepare(
@@ -145,17 +147,15 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
 
     // Make the table 
     ?>
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th class="w-15">Date</th>
-          <th class="w-25">Result</th>
-          <th class="w-50">Comments</th>
-          <!-- Next two columns are for Edit and Delete buttons -->
-          <th class="w-5"></th>
-          <th class="w-5"></th>
-        </tr>
-      </thead>
+    
+      <tr class="bg-inherit">
+        <th class="w-15">Date</th>
+        <th class="w-25">Result</th>
+        <th class="w-50">Comments</th>
+        <!-- Next two columns are for Edit and Delete buttons -->
+        <th class="w-5"></th>
+        <th class="w-5"></th>
+      </tr>
       <tbody>
         <?php
         // loop throuch each piece of clinical data
@@ -182,11 +182,12 @@ if (isset($_POST['delete_data']) && isfilled($_POST['delete_data'])) {
         } //end row loop 
         ?>
       </tbody>
-    </table>
+    
     <?php
     }   // end testType loop
 
     ?>
+    </table>
   </div>
 
 </body>

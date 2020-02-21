@@ -28,7 +28,7 @@ if (isset($_POST['signup_submit'])) {
       if (isset($_POST['fname']))
         $fName = clean_input($_POST['fname']);
       if (isset($_POST['lname']))
-        $fName = clean_input($_POST['lname']);
+        $lName = clean_input($_POST['lname']);
 
       // hash the password
       $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
