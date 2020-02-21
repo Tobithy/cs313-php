@@ -1,16 +1,17 @@
 <?php
 
-// Function loggedIn 
-//  Returns True if user is logged in, false if not
-function loggedIn() {
-  if (isset($_SESSION['logged_in'])){
-    if ($_SESSION['logged_in'] === true)
-    {
-      return true;
-    }
+// Function checkLogin
+//  This function checks if the user has a email_address session variable. If not, then redirects 
+//  the user back to the labtracker main page. Returns nothing
+function checkLogin()
+{
+  if (isset($_SESSION['email_address'])) {
+    // do nothing, assume if this variable is set then the user is logged in
+  } else {
+    $newpage = "Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . "/labtracker/";
+    header($newpage, true, 303);
+    die();
   }
-
-  return false;
 }
 
 // Function clean_input
@@ -79,7 +80,7 @@ function clinicalDataOKToModify($db, $clinicalDataId){
         (SELECT user_account_id FROM user_account
             WHERE email_address = :email
         )
-    "
+    ;"
   );
 
   // execute the statement

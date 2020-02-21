@@ -39,6 +39,16 @@
           </div>
         </div>
       </div>
+      <div class="col-md-4">
+        <div class="card bg-warning h-100">
+          <img class="card-img-top" src="img_assignments/labtracker.jpg" alt="Project 1 - LabTracker">
+          <div class="card-body">
+            <h4 class="card-title">Project 1</h4>
+            <p class="card-text">LabTracker</p>
+            <a href="labtracker/" class="stretched-link"></a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

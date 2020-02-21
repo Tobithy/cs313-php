@@ -38,15 +38,17 @@ INSERT INTO data_display_pref   (display_preference)
 INSERT INTO data_display_pref (display_preference)
     VALUES ('GRAPHICAL');
 
+-- Mark's pw is 123456
 INSERT INTO user_account (email_address, hashed_password, first_name, last_name, data_display_pref_id)
-    VALUES ('markhammond@gmail.com', 'THISISMARKSHASHEDPASSWORD', 'Mark', 'Hammond', 
+    VALUES ('markhammond@gmail.com', '$2y$10$Z1gElsQe1Esc3wvUAFgtL.MtSlf376O7dJA8OGd3IHNOhsXkGDTEW', 'Mark', 'Hammond', 
         (SELECT data_display_pref_id FROM data_display_pref AS d WHERE d.display_preference = 'GRAPHICAL')
 );
 
+-- Bob's pw is 654321
 INSERT INTO user_account
     (email_address, hashed_password, first_name, last_name, data_display_pref_id)
 VALUES
-    ('edgycollapser@yahoo.com', 'THISISBOBSHASHEDPASSWORD', 'Bob', 'Wooley',
+    ('edgycollapser@yahoo.com', '$2y$10$Yjl7YmCAWMiISzKgxvzSde2h17ZpR000BsLIfrqIE19a1hjU5HAIu', 'Bob', 'Wooley',
         (SELECT data_display_pref_id
         FROM data_display_pref AS d
         WHERE d.display_preference = 'TABULAR')

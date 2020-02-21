@@ -2,21 +2,17 @@
 // use php sessions for tracking users
 session_start();
 
-$_SESSION['email_address'] = 'markhammond@gmail.com'; // for testing only
-// $_SESSION['clinical_data_id_to_edit'] = 4;  // TESTING ONLY
-
 // include labtracker_common_php.php, for now it's just local
 require_once 'labtracker_common_php.php';
 
 // Make sure user is logged in
-if (loggedIn() === false) {
-  // header("Location: ./"); // Redirect the user back to login
-}
+checkLogin();
 
 // If the clinical_data_id_to_edit session variable isn't set, redirect back to data_view
 if (!isset($_SESSION['clinical_data_id_to_edit'])) {
   $newpage = "Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . "/labtracker/data_view.php";
   header($newpage, true, 303);
+  die();
 }
 
 // Now that we know we are logged in, we can connect to the database
@@ -74,6 +70,7 @@ if (isset($_POST['modify_data'])) {
       unset($_SESSION['clinical_data_id_to_edit']);
       $newpage = "Location: " . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . "/labtracker/data_view.php";
       header($newpage, true, 303);
+      die();
     } else {
       // in this case, don't redirect anywhere, just render the page. The user will be notified if there was a failure
     }
@@ -119,15 +116,13 @@ if (isset($_POST['modify_data'])) {
     $dataComment = $clinicalDataResults[0]['data_comment'];
   }
 }
-// session_unset();
-// session_destroy();
 ?>
 
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
-  <title>LabTrack - Edit Data | CS313 Project 1</title>
+  <title>LabTracker - Edit Data | CS313 Project 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta charset="utf-8">
 
